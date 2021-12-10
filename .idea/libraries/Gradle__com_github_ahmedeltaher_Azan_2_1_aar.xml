@@ -1,0 +1,18 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.ahmedeltaher:Azan:2.1@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4ee578db2283892facde070c7c8d8f12/Azan-2.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4ee578db2283892facde070c7c8d8f12/Azan-2.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4ee578db2283892facde070c7c8d8f12/Azan-2.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4ee578db2283892facde070c7c8d8f12/jetified-Azan-2.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4ee578db2283892facde070c7c8d8f12/jetified-Azan-2.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4ee578db2283892facde070c7c8d8f12/jetified-Azan-2.1/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.ahmedeltaher/Azan/2.1/622bf76baa233394add6e271d26bfadc9f15dc3a/Azan-2.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.ahmedeltaher/Azan/2.1/ea04c0c12b8d69751ae94577ebc3fa0e1aa1b7b6/Azan-2.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,18 @@
+<component name="libraryTable">
+  <library name="Gradle: it.neokree:MaterialTabs:0.11@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f63bef073c7cb57a5cb8702610b992ab/MaterialTabs-0.11/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f63bef073c7cb57a5cb8702610b992ab/MaterialTabs-0.11/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f63bef073c7cb57a5cb8702610b992ab/MaterialTabs-0.11/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f63bef073c7cb57a5cb8702610b992ab/jetified-MaterialTabs-0.11/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f63bef073c7cb57a5cb8702610b992ab/jetified-MaterialTabs-0.11/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f63bef073c7cb57a5cb8702610b992ab/jetified-MaterialTabs-0.11/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/it.neokree/MaterialTabs/0.11/6abfdb983709aa6da621655d57b1d8220e07f9ed/MaterialTabs-0.11-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/it.neokree/MaterialTabs/0.11/6ce2a9aab571fe40cf8ae8a4bcfd0eae1084752d/MaterialTabs-0.11-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

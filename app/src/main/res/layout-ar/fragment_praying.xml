@@ -1,0 +1,411 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_port"
+    android:orientation="vertical"
+    tools:context="captech.muslimutility.ui.fragments.PrayingFragment">
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_weight="1.8"
+        android:background="@color/colorAccent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/slider_background" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="8dp"
+            android:text="---"
+            android:textColor="@color/white"
+            android:textSize="@dimen/mid" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="8dp"
+            android:layout_toRightOf="@+id/textView"
+            android:gravity="right"
+            android:paddingLeft="10dp"
+            android:text="@string/not_detected"
+            android:textColor="@color/white"
+            android:textSize="@dimen/mid" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="5dp"
+            android:text="---"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/white"
+            android:textSize="@dimen/date_number"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/textView3"
+            android:text="--"
+            android:textColor="@color/white"
+            android:textSize="@dimen/mid" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/textView3"
+            android:layout_marginRight="5dp"
+            android:text="---"
+            android:textColor="@color/white"
+            android:textSize="@dimen/date_number"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/textView3"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toLeftOf="@+id/textView5"
+            android:gravity="right"
+            android:text="--"
+            android:textColor="@color/white"
+            android:textSize="@dimen/mid" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="-10dp"
+            android:fontFamily="sans-serif-light"
+            android:text="---- : ---"
+            android:textColor="@color/white"
+            android:textSize="@dimen/mid"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView7"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/no_location"
+            android:textColor="@color/white"
+            android:textSize="@dimen/mid" />
+
+        <TextView
+            android:id="@+id/textView32"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView8"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:text="---"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/very_small" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/prayer_split_h"
+                android:layout_marginRight="@dimen/prayer_split_h"
+                android:layout_marginTop="@dimen/prayer_split_h"
+                android:layout_weight="1"
+                card_view:cardCornerRadius="20dp"
+                card_view:cardBackgroundColor="@color/weatherbgcolordark">
+
+                <LinearLayout
+                    android:id="@+id/p1"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:gravity="center"
+                        android:text="@string/fajr"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/mid" />
+
+                    <TextView
+                        android:id="@+id/fajrTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:gravity="center"
+                        android:text="---"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/mid" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/prayer_split_h"
+                android:layout_marginRight="@dimen/prayer_split_h"
+                android:layout_marginTop="@dimen/prayer_split_v"
+                android:layout_weight="1"
+                card_view:cardCornerRadius="20dp"
+                card_view:cardBackgroundColor="@color/weatherbgcolordark">
+
+                <LinearLayout
+                    android:id="@+id/p2"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:gravity="center"
+                        android:text="@string/sunrise"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/mid" />
+
+                    <TextView
+                        android:id="@+id/sunriseTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:gravity="center"
+                        android:text="---"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/mid" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/prayer_split_h"
+                android:layout_marginRight="@dimen/prayer_split_h"
+                android:layout_marginTop="@dimen/prayer_split_v"
+                android:layout_weight="1"
+                card_view:cardCornerRadius="20dp"
+                card_view:cardBackgroundColor="@color/weatherbgcolordark">
+
+                <LinearLayout
+                    android:id="@+id/p3"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:gravity="center"
+                        android:text="@string/zuhr"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/mid" />
+
+                    <TextView
+                        android:id="@+id/zuhrTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:gravity="center"
+                        android:text="---"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/mid" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/prayer_split_h"
+                android:layout_marginRight="@dimen/prayer_split_h"
+                android:layout_marginTop="@dimen/prayer_split_v"
+                android:layout_weight="1"
+                card_view:cardCornerRadius="20dp"
+                card_view:cardBackgroundColor="@color/weatherbgcolordark">
+
+                <LinearLayout
+                    android:id="@+id/p4"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:gravity="center"
+                        android:text="@string/asr"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/mid" />
+
+                    <TextView
+                        android:id="@+id/asrTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:gravity="center"
+                        android:text="---"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/mid" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/prayer_split_h"
+                android:layout_marginLeft="@dimen/prayer_split_h"
+                android:layout_marginRight="@dimen/prayer_split_h"
+                android:layout_marginTop="@dimen/prayer_split_v"
+                android:layout_weight="1"
+                card_view:cardCornerRadius="20dp"
+                card_view:cardBackgroundColor="@color/weatherbgcolordark">
+
+                <LinearLayout
+                    android:id="@+id/p5"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:gravity="center"
+                        android:text="@string/magrib"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/mid" />
+
+                    <TextView
+                        android:id="@+id/magribTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:gravity="center"
+                        android:text="---"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/mid" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/prayer_split_h"
+                android:layout_marginLeft="@dimen/prayer_split_h"
+                android:layout_marginRight="@dimen/prayer_split_h"
+                android:layout_marginTop="@dimen/prayer_split_v"
+                android:layout_weight="1"
+                card_view:cardCornerRadius="20dp"
+                card_view:cardBackgroundColor="@color/weatherbgcolordark">
+
+                <LinearLayout
+                    android:id="@+id/p6"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:gravity="center"
+                        android:text="@string/isha"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/mid" />
+
+                    <TextView
+                        android:id="@+id/ishaTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:gravity="center"
+                        android:text="---"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/mid" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

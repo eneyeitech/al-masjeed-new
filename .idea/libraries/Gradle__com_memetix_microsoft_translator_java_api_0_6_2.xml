@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.memetix:microsoft-translator-java-api:0.6.2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.memetix/microsoft-translator-java-api/0.6.2/2b9686e4d86b1565f3fa7a5060246b40ba96e447/microsoft-translator-java-api-0.6.2.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.memetix/microsoft-translator-java-api/0.6.2/7c6c0584c469facb3ecc20e4061d61deaa805df4/microsoft-translator-java-api-0.6.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.memetix/microsoft-translator-java-api/0.6.2/bca7a6e1ccaba31842a1da13128bc0c303355295/microsoft-translator-java-api-0.6.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

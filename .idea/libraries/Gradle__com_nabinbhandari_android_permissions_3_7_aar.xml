@@ -1,0 +1,18 @@
+<component name="libraryTable">
+  <library name="Gradle: com.nabinbhandari.android:permissions:3.7@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ac10092b08e72d0182c1baae3fd99fd9/permissions-3.7/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ac10092b08e72d0182c1baae3fd99fd9/permissions-3.7/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ac10092b08e72d0182c1baae3fd99fd9/permissions-3.7/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ac10092b08e72d0182c1baae3fd99fd9/jetified-permissions-3.7/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ac10092b08e72d0182c1baae3fd99fd9/jetified-permissions-3.7/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ac10092b08e72d0182c1baae3fd99fd9/jetified-permissions-3.7/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.nabinbhandari.android/permissions/3.7/c6723abad0d9a0904c41ea59f8d0b3d1bea0176d/permissions-3.7-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.nabinbhandari.android/permissions/3.7/4c5365dff35c26cd0da02d8e17aab4f208f2bb9f/permissions-3.7-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

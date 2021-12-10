@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="captech.muslimutility.ui.activity.MainActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/weatherbgcolordark"
+        android:paddingTop="@dimen/appbar_padding_top"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        app:tabBackground="@color/weatherbgcolordarker"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/colorAccent"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/colorTextPrimary"
+        app:tabTextAppearance="@style/CustomTabText"
+        app:tabTextColor="@color/colorTextDisable">
+
+        <com.google.android.material.tabs.TabItem
+            style="@style/tab_item"
+            android:icon="@drawable/tab_call_selector" />
+
+        <com.google.android.material.tabs.TabItem
+            style="@style/tab_item"
+            android:icon="@drawable/tab_chat_selector" />
+
+        <com.google.android.material.tabs.TabItem
+            style="@style/tab_item"
+            android:icon="@drawable/tab_events_selector" />
+
+        <com.google.android.material.tabs.TabItem
+            style="@style/tab_item"
+            android:icon="@drawable/tab_contacts_selector" />
+
+        <!--com.google.android.material.tabs.TabItem
+            style="@style/tab_item"
+            android:icon="@drawable/tab_weather_selector" /-->
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_below="@+id/appbar"
+            android:visibility="visible" />
+
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            android:id="@+id/adView"
+            android:layout_gravity="bottom"
+            ads:adUnitId="@string/banner_id"></com.google.android.gms.ads.AdView>
+
+    </LinearLayout>
+
+</LinearLayout>

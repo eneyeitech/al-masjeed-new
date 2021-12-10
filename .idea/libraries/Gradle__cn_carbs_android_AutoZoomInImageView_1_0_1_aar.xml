@@ -1,0 +1,19 @@
+<component name="libraryTable">
+  <library name="Gradle: cn.carbs.android:AutoZoomInImageView:1.0.1@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0f127d668daee0d8a1bb783b5a7a3176/AutoZoomInImageView-1.0.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0f127d668daee0d8a1bb783b5a7a3176/AutoZoomInImageView-1.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0f127d668daee0d8a1bb783b5a7a3176/AutoZoomInImageView-1.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0f127d668daee0d8a1bb783b5a7a3176/jetified-AutoZoomInImageView-1.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ca5d83f8ff66e3577cef71b0d3468ce6/jetified-AutoZoomInImageView-1.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0f127d668daee0d8a1bb783b5a7a3176/jetified-AutoZoomInImageView-1.0.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0f127d668daee0d8a1bb783b5a7a3176/jetified-AutoZoomInImageView-1.0.1/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/cn.carbs.android/AutoZoomInImageView/1.0.1/73089d590718a488cc93531b15279b03b3e1cf79/AutoZoomInImageView-1.0.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/cn.carbs.android/AutoZoomInImageView/1.0.1/e294f0630564aae8895264f7bfc34da37b4ab03c/AutoZoomInImageView-1.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
