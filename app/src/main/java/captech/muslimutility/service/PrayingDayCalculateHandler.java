@@ -100,8 +100,17 @@ public class PrayingDayCalculateHandler extends IntentService {
 
         for (int i = (counter - 1); i < prayerTimes.size(); i++) {
             //alarm for every prayer
-            Alarms.setNotificationAlarm(getApplicationContext(), prayerTimes.get(i).getHour()
-                    , prayerTimes.get(i).getMinute(), PRAYER_SIG + i, i + "");
+            int hr = prayerTimes.get(i).getHour();
+            int min = prayerTimes.get(i).getMinute();
+            if ((min - 5) < 0){
+                hr = hr - 1;
+                min = 60 - Math.abs(min - 5);
+            } else {
+                min = min - 5;
+            }
+
+            Alarms.setNotificationAlarm(getApplicationContext(), hr
+                    , min, PRAYER_SIG + i, i + "");
 
             Log.d("String_date" , prayerTimes.get(i).getHour()+" "+prayerTimes.get(i).getMinute());
 

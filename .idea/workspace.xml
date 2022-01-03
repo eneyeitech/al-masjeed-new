@@ -14,20 +14,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="110fe56c-623d-4b20-8d8c-69e00a238394" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="110fe56c-623d-4b20-8d8c-69e00a238394" name="Default" comment="Fixed Notification">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/service/MosqueTimings.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/service/MosqueTimings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/service/PrayerNotification.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/service/PrayerNotification.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/service/PrayingDayCalculateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/service/PrayingDayCalculateHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/service/SilentMoodAlarm.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/service/SilentMoodAlarm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/ui/activity/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/ui/activity/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/ui/activity/SelectLocationTabsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/ui/activity/SelectLocationTabsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/ui/fragments/TimingsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/ui/fragments/TimingsFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_timings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_timings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -239,7 +228,19 @@
       <option name="presentableId" value="Default" />
       <updated>1544166376437</updated>
     </task>
+    <task id="LOCAL-00001" summary="Fixed Notification">
+      <created>1641222003662</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1641222003662</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Fixed Notification" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed Notification" />
   </component>
   <component name="masterDetails">
     <states>
