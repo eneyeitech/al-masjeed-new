@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/drawer_back"
     android:orientation="vertical"
+    android:tag="timings"
+    android:id="@+id/fragment_timings"
     tools:context=".ui.fragments.TimingsFragment">
 
 

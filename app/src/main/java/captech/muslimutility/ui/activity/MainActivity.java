@@ -2,6 +2,8 @@ package captech.muslimutility.ui.activity;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,11 +18,14 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import com.google.android.material.tabs.TabLayout;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -36,6 +41,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -69,9 +75,11 @@ import captech.muslimutility.calculator.quibla.QuiblaCalculator;
 import captech.muslimutility.config.Config;
 import captech.muslimutility.database.ConfigPreferences;
 import captech.muslimutility.model.LocationInfo;
+import captech.muslimutility.model.MosquePrayerTimes;
 import captech.muslimutility.model.ZekerType;
 import captech.muslimutility.service.FusedLocationService;
 import captech.muslimutility.service.MosqueTimings;
+import captech.muslimutility.service.PrayingDayCalculateHandler;
 import captech.muslimutility.ui.fragments.AzkarFragment;
 import captech.muslimutility.ui.fragments.CalendarFragment;
 import captech.muslimutility.ui.fragments.IslamicEventsFragment;
@@ -103,6 +111,11 @@ public class MainActivity extends AppCompatActivity implements com.google.androi
     private List found = null;
     private TextView name, fajr, sunrise, zuhr, asr, magrib, isha;
     private SimpleDateFormat format;
+
+    public static final String CHANNEL_ID = "#180";
+    public static final String CHANNEL_NAME = "Prayer Time Notification";
+    public static final String CHANNEL_DESCRIPTION = "New Implementation";
+
 
     private int[] tabIcons = {
             R.drawable.mosqueone,
@@ -148,6 +161,8 @@ public class MainActivity extends AppCompatActivity implements com.google.androi
         } catch (IOException e) {
 
         }
+
+
 
 //        zekerTypeList = dbManager.getAllAzkarTypes();
 
@@ -271,8 +286,49 @@ public class MainActivity extends AppCompatActivity implements com.google.androi
             }
         }
 
+        NotificationManager notificationManager = null;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    CHANNEL_ID,
+                    CHANNEL_NAME,
+                    NotificationManager.IMPORTANCE_DEFAULT
+            );
+            channel.setDescription(CHANNEL_DESCRIPTION);
+            notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        } else {
+
+            notificationManager =
+                    (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                && !notificationManager.isNotificationPolicyAccessGranted()) {
+
+            Intent intent = new Intent(
+                    android.provider.Settings
+                            .ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+
+            startActivity(intent);
+        }
+
+
+
         new AzkarTypes().execute();
 
+    }
+
+    public void showNotification(MenuItem item) {
+        boolean aboveLollipopFlag = android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this, CHANNEL_ID)
+                        .setSmallIcon(aboveLollipopFlag ? R.drawable.notification_white : R.drawable.roundicon)
+                        .setContentTitle("Hello, attention!")
+                        .setContentText("Here's the notification you were looking for!")
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        NotificationManagerCompat mNotificationManager = NotificationManagerCompat.from(this);
+        mNotificationManager.notify(1, mBuilder.build());
     }
 
     public void fetchMosqueTimings() {
@@ -287,9 +343,10 @@ public class MainActivity extends AppCompatActivity implements com.google.androi
         final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         final SharedPreferences.Editor editor = preferences.edit();
 
-        new Thread() {
+        //Body of your click handler
+        Thread thread = new Thread(new Runnable(){
             @Override
-            public void run() {
+            public void run(){
                 //you call here
                 String range = "Sheet1!A2:H";
                 ValueRange result = null;
@@ -298,122 +355,162 @@ public class MainActivity extends AppCompatActivity implements com.google.androi
                             .get(spreadsheetId, range)
                             .setKey(Config.google_api_key)
                             .execute();
+                    List<List<Object>> values = result.getValues() ;
+                    int numRows = result.getValues() != null ? result.getValues().size() : 0;
+                    Log.d("SUCCESS.", "rows retrived " + numRows);
+                    System.out.println("Name, Code, Fajr, Sunrise, Zuhr, Asr, Maghrib, Isha");
+                    Log.d("SUCCESS.", "Name, Code, Fajr, Sunrise, Zuhr, Asr, Maghrib, Isha");
+
+                    String mc = preferences.getString("mosquecode", mosque_code);
+                    for (List row : values) {
+                        // Print columns A and E, which correspond to indices 0 and 4.
+                        String code = (String) row.get(1);
+                        if(code.toLowerCase().equals(mc.toLowerCase())) {
+                            found = row;
+
+                        }
+
+                    }
+                    if(found != null) {
+                        MosqueTimings.setTimings(found);
+
+                        //Update
+                        name = (TextView) findViewById(R.id.mosque_name);
+                        fajr = (TextView) findViewById(R.id.fajrTime);
+                        sunrise = (TextView) findViewById(R.id.sunriseTime);
+                        zuhr = (TextView) findViewById(R.id.zuhrTime);
+                        asr = (TextView) findViewById(R.id.asrTime);
+                        magrib = (TextView) findViewById(R.id.magribTime);
+                        isha = (TextView) findViewById(R.id.ishaTime);
+
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+                        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+                        String currentDate = sdf.format(new Date());
+
+                        String fStr = "",sStr="",zStr="",aStr="",mStr="",iStr="";
+
+                        DateFormat formatter = new SimpleDateFormat("yyyy.MM.d hh:mm");
+
+                        final Date fajrDate, sunriseDate, zuhrDate, asrDate, magribDate, ishaDate;
+                        fStr = currentDate + " " + found.get(2);
+                        sStr = currentDate + " " + found.get(3);
+                        zStr = currentDate + " " + found.get(4);
+                        aStr = currentDate + " " + found.get(5);
+                        mStr = currentDate + " " + found.get(6);
+                        iStr = currentDate + " " + found.get(7);
+                        //sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                        //SharedPreferences.Editor editor = sharedpreferences.edit();
+
+                        editor.putString("ifajr", fStr);
+                        editor.putString("isunset", sStr);
+                        editor.putString("izohr", zStr);
+                        editor.putString("iasr", aStr);
+                        editor.putString("imaghrib", mStr);
+                        editor.putString("iisha", iStr);
+
+                        try {
+                            fajrDate = (Date)formatter.parse(fStr);
+                            sunriseDate = (Date)formatter.parse(sStr);
+                            zuhrDate = (Date)formatter.parse(zStr);
+                            asrDate = (Date)formatter.parse(aStr);
+                            magribDate = (Date)formatter.parse(mStr);
+                            ishaDate = (Date)formatter.parse(iStr);
+
+                            Log.d("MA::Fajr",String.valueOf(fajrDate));
+                            Log.d("MA::Fajr",String.valueOf(format.format(fajrDate)));
+                            Log.d("MA::Sunrise",String.valueOf(sunriseDate));
+                            Log.d("MA::Sunrise",String.valueOf(format.format(sunriseDate)));
+                            Log.d("MA::Zuhr",String.valueOf(zuhrDate));
+                            Log.d("MA::Zuhr",String.valueOf(format.format(zuhrDate)));
+                            Log.d("MA::Asr",String.valueOf(asrDate));
+                            Log.d("MA::Asr",String.valueOf(format.format(asrDate)));
+                            Log.d("MA::Magrib",String.valueOf(magribDate));
+                            Log.d("MA::Magrib",String.valueOf(format.format(magribDate)));
+                            Log.d("MA::Isha",String.valueOf(ishaDate));
+                            Log.d("MA::Isha",iStr);
+                            Log.d("MA::Isha",String.valueOf(format.format(ishaDate)));
+
+                            editor.putString("mosquename", String.valueOf( found.get(0)));
+                            editor.putString("fajr", format.format(fajrDate));
+                            editor.putString("sunset", format.format(sunriseDate));
+                            editor.putString("zohr", format.format(zuhrDate));
+                            editor.putString("asr", format.format(asrDate));
+                            editor.putString("maghrib", format.format(magribDate));
+                            editor.putString("isha", format.format(ishaDate));
+                            editor.putString("mosquecode",mosque_code);
+
+                            /**editor.putString("mosquename", String.valueOf( found.get(0)));
+                            editor.putString("fajr", format.format(fajrDate));
+                            editor.putString("sunset", format.format(sunriseDate));
+                            editor.putString("zohr", format.format(zuhrDate));
+                            editor.putString("asr", format.format(asrDate));
+                            editor.putString("maghrib", format.format(magribDate));
+                            editor.putString("isha", format.format(ishaDate));
+                            editor.putString("mosquecode",mosque_code);*/
+
+                            editor.apply();
+                            editor.commit();
+
+                            runOnUiThread(new Runnable() {
+
+                                @Override
+                                public void run() {
+
+                                    /**name.setText((CharSequence) found.get(0));
+                                    fajr.setText(String.valueOf(format.format(fajrDate)));
+                                    sunrise.setText(String.valueOf(format.format(sunriseDate)));
+                                    zuhr.setText(String.valueOf(format.format(zuhrDate)));
+                                    asr.setText(String.valueOf(format.format(asrDate)));
+                                    magrib.setText(String.valueOf(format.format(magribDate)));
+                                    isha.setText(String.valueOf(format.format(ishaDate)));*/
+
+                                    FragmentManager fragmentManager = getSupportFragmentManager();
+                                    fragmentManager.beginTransaction()
+                                            .replace(R.id.fragment_timings, TimingsFragment.class, null, "tag")
+                                            .setReorderingAllowed(true)
+                                            .addToBackStack(null)
+                                            .commit();
+
+                                    TimingsFragment fragment = (TimingsFragment) fragmentManager.findFragmentByTag("timings");
+
+                                }
+                            });
+                            Log.d("Love::2", "rows retrived " + numRows);
+                            getApplicationContext().startService(new Intent(getApplicationContext(), PrayingDayCalculateHandler.class));
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                Log.d("Love::1.", "My Love");
+                                //getApplicationContext().startForegroundService(new Intent(getApplicationContext(), PrayingDayCalculateHandler.class));
+                            }else {
+
+                            }
+
+
+
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 } catch (IOException e) {
+
+                    runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+
+                            Toast.makeText(getApplicationContext(),"No Network",Toast.LENGTH_LONG);
+                        }
+                    });
                     e.printStackTrace();
-                }
-                List<List<Object>> values = result.getValues() ;
-                int numRows = result.getValues() != null ? result.getValues().size() : 0;
-                Log.d("SUCCESS.", "rows retrived " + numRows);
-                System.out.println("Name, Code, Fajr, Sunrise, Zuhr, Asr, Maghrib, Isha");
-                Log.d("SUCCESS.", "Name, Code, Fajr, Sunrise, Zuhr, Asr, Maghrib, Isha");
-//                List found = null;
-                String mc = preferences.getString("mosquecode", mosque_code);
-                for (List row : values) {
-                    // Print columns A and E, which correspond to indices 0 and 4.
-                    String code = (String) row.get(1);
-                    if(code.toLowerCase().equals(mc.toLowerCase())) {
-                        found = row;
-                    }
-
-                }
-                if(found != null) {
-                    MosqueTimings.setTimings(found);
-
-
-
-                    //Intent intent = getIntent();
-                    //sendBroadcast(new Intent().setAction("prayer.information.change"));
-                    //finish();
-                    //startActivity(intent);
-
-                    //Update
-                     name = (TextView) findViewById(R.id.mosque_name);
-                     fajr = (TextView) findViewById(R.id.fajrTime);
-                     sunrise = (TextView) findViewById(R.id.sunriseTime);
-                     zuhr = (TextView) findViewById(R.id.zuhrTime);
-                     asr = (TextView) findViewById(R.id.asrTime);
-                     magrib = (TextView) findViewById(R.id.magribTime);
-                     isha = (TextView) findViewById(R.id.ishaTime);
-
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
-                    sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-                    String currentDate = sdf.format(new Date());
-
-
-                    String fStr = "",sStr="",zStr="",aStr="",mStr="",iStr="";
-
-
-                    DateFormat formatter = new SimpleDateFormat("yyyy.MM.d hh:mm");
-
-
-
-                    //fajrDate = prayerTimes.getPrayTime(PrayersType.FAJR);
-                    Date fajrDate, sunriseDate, zuhrDate, asrDate, magribDate, ishaDate;
-                    fStr = currentDate + " " + found.get(2);
-                    sStr = currentDate + " " + found.get(3);
-                    zStr = currentDate + " " + found.get(4);
-                    aStr = currentDate + " " + found.get(5);
-                    mStr = currentDate + " " + found.get(6);
-                    iStr = currentDate + " " + found.get(7);
-                    //sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-                    //SharedPreferences.Editor editor = sharedpreferences.edit();
-
-                    try {
-                        fajrDate = (Date)formatter.parse(fStr);
-                        sunriseDate = (Date)formatter.parse(sStr);
-                        zuhrDate = (Date)formatter.parse(zStr);
-                        asrDate = (Date)formatter.parse(aStr);
-                        magribDate = (Date)formatter.parse(mStr);
-                        ishaDate = (Date)formatter.parse(iStr);
-                        editor.putString("mosquename", String.valueOf( found.get(0)));
-                        editor.putString("fajr", format.format(fajrDate));
-                        editor.putString("sunset", format.format(sunriseDate));
-                        editor.putString("zohr", format.format(zuhrDate));
-                        editor.putString("asr", format.format(asrDate));
-                        editor.putString("maghrib", format.format(magribDate));
-                        editor.putString("isha", format.format(ishaDate));
-                        editor.putString("mosquecode",mosque_code);
-                        editor.apply();
-                        editor.commit();
-                        name.setText((CharSequence) found.get(0));
-                         fajr.setText(String.valueOf(format.format(fajrDate)));
-                         sunrise.setText(String.valueOf(format.format(sunriseDate)));
-                         zuhr.setText(String.valueOf(format.format(zuhrDate)));
-                         asr.setText(String.valueOf(format.format(asrDate)));
-                         magrib.setText(String.valueOf(format.format(magribDate)));
-                         isha.setText(String.valueOf(format.format(ishaDate)));
-
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-
-
-                    /**editor.putString("mosquename", String.valueOf( found.get(0)));
-                    editor.putString("fajr", String.valueOf(found.get(2)));
-                    editor.putString("sunset", String.valueOf(found.get(3)));
-                    editor.putString("zohr", String.valueOf(found.get(4)));
-                    editor.putString("asr", String.valueOf(found.get(5)));
-                    editor.putString("maghrib", String.valueOf(found.get(6)));
-                    editor.putString("isha", String.valueOf(found.get(7)));*/
-
-                    /**name.setText((CharSequence) found.get(0));
-                    fajr.setText((CharSequence) found.get(2));
-                    sunrise.setText((CharSequence) found.get(3));
-                    zuhr.setText((CharSequence) found.get(4));
-                    asr.setText((CharSequence) found.get(5));
-                    magrib.setText((CharSequence) found.get(6));
-                    isha.setText((CharSequence) found.get(7));*/
-
-
-
-
-
 
 
                 }
+
 
             }
-        }.start();
+        });
+        thread.start();
+
+
         /**SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         name.setText(preferences.getString("mosquename", String.valueOf(found.get(0))));
         fajr.setText(preferences.getString("fajr", String.valueOf(found.get(2))));
@@ -487,6 +584,7 @@ public class MainActivity extends AppCompatActivity implements com.google.androi
 
                     fetchMosqueTimings();
 
+                    
 
 
             }
@@ -538,6 +636,8 @@ public class MainActivity extends AppCompatActivity implements com.google.androi
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, CompassActivity.class));
             return true;
+        } else if (id == R.id.action_refresh_timings) {
+            fetchMosqueTimings();
         } else if (id == R.id.action_add_mosque) {
             insertMosqueCode();
             return true;

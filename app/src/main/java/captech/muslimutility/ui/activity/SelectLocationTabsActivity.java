@@ -358,6 +358,10 @@ public class SelectLocationTabsActivity extends AppCompatActivity implements Mat
                     if (progressDialog != null) {
                         progressDialog.dismiss();
                     }
+                    if (dialog != null) {
+                        dialog.dismiss();
+                    }
+
                     if (!isFromLocationBtn) {
                         context.startActivity(new Intent(context, PrayShowActivity.class).putExtra("date", hgDate.getDay() + "-" + hgDate.getMonth() + "-" + hgDate.getYear() + "- 0"));
                         ((Activity) context).finish();

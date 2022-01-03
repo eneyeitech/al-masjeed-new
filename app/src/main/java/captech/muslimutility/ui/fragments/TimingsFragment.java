@@ -264,7 +264,7 @@ public class TimingsFragment extends Fragment {
     private void timingsUpdate()  {
         try {
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-            mosqueName.setText(preferences.getString("mosquename", "My Mosque"));
+            mosqueName.setText(preferences.getString("mosquename", "Enter Mosque Code"));
             fajr.setText(preferences.getString("fajr", ""));
             sunrise.setText(preferences.getString("sunset", ""));
             zuhr.setText(preferences.getString("zohr", ""));
@@ -272,23 +272,32 @@ public class TimingsFragment extends Fragment {
             magrib.setText(preferences.getString("maghrib", ""));
             isha.setText(preferences.getString("isha", ""));
 
+
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
             sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
             String currentDate = sdf.format(new Date());
 
-            DateFormat formatter = new SimpleDateFormat("yyyy.MM.d hh:mm a");
+            //DateFormat formatter = new SimpleDateFormat("yyyy.MM.d hh:mm a");
+
+            DateFormat formatter = new SimpleDateFormat("yyyy.MM.d hh:mm");
             String dateString = "";
-            dateString = currentDate + " " + preferences.getString("fajr", String.valueOf(t.get(2)));
+            dateString = preferences.getString("ifajr", currentDate + " " + String.valueOf(t.get(2)));
+            Log.d("f",dateString);
             fajrDate = (Date)formatter.parse(dateString);
-            dateString = currentDate + " " + preferences.getString("sunrise", String.valueOf(t.get(3)));
+            dateString = preferences.getString("isunrise", currentDate + " " + String.valueOf(t.get(3)));
+            Log.d("s",dateString);
             sunriseDate = (Date)formatter.parse(dateString);
-            dateString = currentDate + " " + preferences.getString("zohr", String.valueOf(t.get(4)));
+            dateString = preferences.getString("izohr", currentDate + " " + String.valueOf(t.get(4)));
+            Log.d("z",dateString);
             duhrDate = (Date)formatter.parse(dateString);
-            dateString = currentDate + " " + preferences.getString("asr", String.valueOf(t.get(5)));
+            dateString = preferences.getString("iasr", currentDate + " " + String.valueOf(t.get(5)));
+            Log.d("a",dateString);
             asrDate = (Date)formatter.parse(dateString);
-            dateString = currentDate + " " + preferences.getString("magrib", String.valueOf(t.get(6)));
+            dateString = preferences.getString("imagrib", currentDate + " " + String.valueOf(t.get(6)));
+            Log.d("m",dateString);
             maghrebDate = (Date)formatter.parse(dateString);
-            dateString = currentDate + " " + preferences.getString("isha", String.valueOf(t.get(7)));
+            dateString = preferences.getString("iisha", currentDate + " " + String.valueOf(t.get(7)));
+            Log.d("i",dateString);
             ishaDate = (Date)formatter.parse(dateString);
 
 
@@ -298,11 +307,24 @@ public class TimingsFragment extends Fragment {
             Log.d("TIMETIEN::2",String.valueOf(preferences.getString("isha", "")));
 
             Log.d("Fajr",String.valueOf(fajrDate));
+            Log.d("Fajr",String.valueOf(format.format(fajrDate)));
             Log.d("Sunrise",String.valueOf(sunriseDate));
+            Log.d("Sunrise",String.valueOf(format.format(sunriseDate)));
             Log.d("Zuhr",String.valueOf(duhrDate));
+            Log.d("Zuhr",String.valueOf(format.format(duhrDate)));
             Log.d("Asr",String.valueOf(asrDate));
+            Log.d("Asr",String.valueOf(format.format(asrDate)));
             Log.d("Magrib",String.valueOf(maghrebDate));
+            Log.d("Magrib",String.valueOf(format.format(maghrebDate)));
             Log.d("Isha",String.valueOf(ishaDate));
+            Log.d("Isha",String.valueOf(format.format(ishaDate)));
+
+            MosqueTimings.addMosqueTiming("fajr", String.valueOf(fajrDate));
+            MosqueTimings.addMosqueTiming("sunrise", String.valueOf(sunriseDate));
+            MosqueTimings.addMosqueTiming("zuhr", String.valueOf(duhrDate));
+            MosqueTimings.addMosqueTiming("asr", String.valueOf(asrDate));
+            MosqueTimings.addMosqueTiming("magrib", String.valueOf(maghrebDate));
+            MosqueTimings.addMosqueTiming("isha", String.valueOf(ishaDate));
 
 
         } catch (Exception e) {
@@ -347,46 +369,46 @@ public class TimingsFragment extends Fragment {
         removeActiveViews();
         Date current = Calendar.getInstance().getTime();
 
-        Log.d("TIMEMM", String.valueOf(current));
+        Log.d("Current Time::TF", String.valueOf(current));
 
 
         if (current.after(fajrDate) && current.before(sunriseDate)) {
             pray2.setBackgroundColor(getResources().getColor(R.color.contrast));
-            dohaurdu.setTextColor(getResources().getColor(R.color.white));
-            sunriseEnTxt.setTextColor(getResources().getColor(R.color.white));
-            sunrise.setTextColor(getResources().getColor(R.color.white));
+            //dohaurdu.setTextColor(getResources().getColor(R.color.white));
+            //sunriseEnTxt.setTextColor(getResources().getColor(R.color.white));
+            //sunrise.setTextColor(getResources().getColor(R.color.white));
             nextPray = getString(R.string.sunrise);
             lastDate = fajrDate;
             nextDate = sunriseDate;
         } else if (current.after(sunriseDate) && current.before(duhrDate)) {
             pray3.setBackgroundColor(getResources().getColor(R.color.contrast));
-            zohrurdu.setTextColor(getResources().getColor(R.color.white));
-            zuhrEnTxt.setTextColor(getResources().getColor(R.color.white));
-            zuhr.setTextColor(getResources().getColor(R.color.white));
+            //zohrurdu.setTextColor(getResources().getColor(R.color.white));
+            //zuhrEnTxt.setTextColor(getResources().getColor(R.color.white));
+            //zuhr.setTextColor(getResources().getColor(R.color.white));
             nextPray = getString(R.string.zuhr);
             lastDate = sunriseDate;
             nextDate = duhrDate;
         } else if (current.after(duhrDate) && current.before(asrDate)) {
             pray4.setBackgroundColor(getResources().getColor(R.color.contrast));
-            asrurdu.setTextColor(getResources().getColor(R.color.white));
-            asrEnTxt.setTextColor(getResources().getColor(R.color.white));
-            asr.setTextColor(getResources().getColor(R.color.white));
+            //asrurdu.setTextColor(getResources().getColor(R.color.white));
+            //asrEnTxt.setTextColor(getResources().getColor(R.color.white));
+            //asr.setTextColor(getResources().getColor(R.color.white));
             nextPray = getString(R.string.asr);
             lastDate = duhrDate;
             nextDate = asrDate;
         } else if (current.after(asrDate) && current.before(maghrebDate)) {
             pray5.setBackgroundColor(getResources().getColor(R.color.contrast));
-            maghriburdu.setTextColor(getResources().getColor(R.color.white));
-            magribEnTxt.setTextColor(getResources().getColor(R.color.white));
-            magrib.setTextColor(getResources().getColor(R.color.white));
+            //maghriburdu.setTextColor(getResources().getColor(R.color.white));
+            //magribEnTxt.setTextColor(getResources().getColor(R.color.white));
+            //magrib.setTextColor(getResources().getColor(R.color.white));
             nextPray = getString(R.string.magrib);
             lastDate = asrDate;
             nextDate = maghrebDate;
         } else if (current.after(maghrebDate) && current.before(ishaDate)) {
             pray6.setBackgroundColor(getResources().getColor(R.color.contrast));
-            ishaurdu.setTextColor(getResources().getColor(R.color.white));
-            ishaEnTxt.setTextColor(getResources().getColor(R.color.white));
-            isha.setTextColor(getResources().getColor(R.color.white));
+            //ishaurdu.setTextColor(getResources().getColor(R.color.white));
+            //ishaEnTxt.setTextColor(getResources().getColor(R.color.white));
+            //isha.setTextColor(getResources().getColor(R.color.white));
             nextPray = getString(R.string.isha);
             lastDate = maghrebDate;
             nextDate = ishaDate;
@@ -400,9 +422,9 @@ public class TimingsFragment extends Fragment {
                 nextDate = getPrayerforNextDay().get()[0];
             }
             pray1.setBackgroundColor(getResources().getColor(R.color.contrast));
-            fajrurdu.setTextColor(getResources().getColor(R.color.white));
-            fajrEnTxt.setTextColor(getResources().getColor(R.color.white));
-            fajr.setTextColor(getResources().getColor(R.color.white));
+            //fajrurdu.setTextColor(getResources().getColor(R.color.white));
+            //fajrEnTxt.setTextColor(getResources().getColor(R.color.white));
+            //fajr.setTextColor(getResources().getColor(R.color.white));
             nextPray = getString(R.string.fajr);
 
         }

@@ -13,6 +13,7 @@ import android.os.IBinder;
 import androidx.core.app.NotificationCompat;
 import android.util.Log;
 
+import androidx.core.app.NotificationManagerCompat;
 import captech.muslimutility.R;
 import captech.muslimutility.calculator.calendar.HGDate;
 import captech.muslimutility.database.ConfigPreferences;
@@ -21,8 +22,12 @@ import captech.muslimutility.ui.activity.PrayerImageActivity;
 import captech.muslimutility.utility.Alarms;
 import captech.muslimutility.utility.MindtrackLog;
 
+
 public class PrayerNotification extends Service {
     private String prayingName , prayerType;
+    public static final String CHANNEL_ID = "#180";
+    public static final String CHANNEL_NAME = "Prayer Time Notification";
+    public static final String CHANNEL_DESCRIPTION = "New Implementation";
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -97,7 +102,7 @@ public class PrayerNotification extends Service {
         PendingIntent intent = PendingIntent.getActivity(this, 0,
                 new Intent(this, MainActivity.class), 0);
         if (ConfigPreferences.getLedNotification(this)) {
-            builder = new NotificationCompat.Builder(this).
+            builder = new NotificationCompat.Builder(this, CHANNEL_ID).
                     setSmallIcon(aboveLollipopFlag ? R.drawable.notification_white : R.drawable.roundicon)
                     .setPriority(Notification.PRIORITY_MAX)
                     .setContentText(prayingName)
@@ -108,7 +113,7 @@ public class PrayerNotification extends Service {
                     .setColor(Color.parseColor("#FF1760AE"))
                     .setContentIntent(intent);
         } else {
-            builder = new NotificationCompat.Builder(this).
+            builder = new NotificationCompat.Builder(this, CHANNEL_ID).
                     setSmallIcon(aboveLollipopFlag ? R.drawable.notification_white : R.drawable.roundicon)
                     .setPriority(Notification.PRIORITY_MAX)
                     .setContentText(prayingName)
@@ -118,9 +123,10 @@ public class PrayerNotification extends Service {
                     .setColor(Color.parseColor("#FF1760AE"))
                     .setContentIntent(intent);
         }
-
-        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        notificationManager.notify(0, builder.build());
+        NotificationManagerCompat mNotificationManager = NotificationManagerCompat.from(this);
+        mNotificationManager.notify(0, builder.build());
+        //NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        //notificationManager.notify(0, builder.build());
     }
 
     @Override

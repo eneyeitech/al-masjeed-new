@@ -27,7 +27,9 @@ import com.google.api.client.auth.oauth2.Credential;
         import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Collections;
-        import java.util.List;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import captech.muslimutility.config.Config;
 import captech.muslimutility.ui.widget.PrayerWidget;
@@ -37,6 +39,16 @@ public class MosqueTimings {
 
     private static List<Object> timings = null;
     private static List<Object> mosqueDefault = new ArrayList<>();
+    private static Map<String, Object> mosqueTiming = new HashMap<>();
+
+    static {
+        MosqueTimings.addMosqueTiming("fajr", "Fri Dec 31 05:20:00 GMT+01:00 2021");
+        MosqueTimings.addMosqueTiming("sunrise", "Fri Dec 31 06:20:00 GMT+01:00 2021");
+        MosqueTimings.addMosqueTiming("zuhr", "Fri Dec 31 13:20:00 GMT+01:00 2021");
+        MosqueTimings.addMosqueTiming("asr", "Fri Dec 31 15:20:00 GMT+01:00 2021");
+        MosqueTimings.addMosqueTiming("magrib", "Fri Dec 31 18:10:00 GMT+01:00 2021");
+        MosqueTimings.addMosqueTiming("isha", "Fri Dec 31 19:19:00 GMT+01:00 2021");
+    }
 
 
     public static List<Object> getTimings() {
@@ -53,6 +65,18 @@ public class MosqueTimings {
             return mosqueDefault;
         }
        return timings;
+    }
+
+    public static void addMosqueTiming(String key, String value){
+        mosqueTiming.put(key, value);
+    }
+
+    public static void setMosqueTiming(Map<String, Object> mosqueTiming){
+        MosqueTimings.mosqueTiming = new HashMap<>(mosqueTiming);
+    }
+
+    public static Map<String, Object> getMosqueTiming(){
+        return mosqueTiming;
     }
 
     public static void setTimings(List<Object> t){

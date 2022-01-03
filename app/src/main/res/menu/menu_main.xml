@@ -10,6 +10,18 @@
         app:showAsAction="always" />
 
     <!--item
+        android:id="@+id/btn_notify"
+        android:title="notify"
+        android:onClick="showNotification"
+        app:showAsAction="always" /-->
+
+    <item
+        android:id="@+id/action_refresh_timings"
+        android:icon="@drawable/refresh"
+        android:title="Refresh Timings"
+        app:showAsAction="always" />
+
+    <!--item
         android:id="@+id/action_location"
         android:icon="@drawable/loc"
         android:title="@string/action_location"

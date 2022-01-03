@@ -2,16 +2,23 @@ package captech.muslimutility.service;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import captech.muslimutility.calculator.prayer.PrayerTimeCalculator;
 import captech.muslimutility.database.ConfigPreferences;
 import captech.muslimutility.model.LocationInfo;
+import captech.muslimutility.model.PrayerTime;
 import captech.muslimutility.utility.Alarms;
 import captech.muslimutility.utility.Calculators;
 import captech.muslimutility.utility.NumbersLocal;
@@ -47,39 +54,89 @@ public class PrayingDayCalculateHandler extends IntentService {
         int hourNow = c.get(Calendar.HOUR_OF_DAY);
         int minsNow = c.get(Calendar.MINUTE);
 
+
+        Map<String, Object> sx = MosqueTimings.getMosqueTiming();
+        String sc = (String) sx.get("fajr");
+        Log.d("String_date::maghrib1", sc.substring(11,19) + "");
+        Log.d("String_date::maghrib2", Integer.parseInt(sc.substring(14,16)) + " SIZE "+prayers.length+" hournow "+hourNow+" minutenow " + minsNow);
+
+        //Sun Jan 02 19:19:00 GMT+01:00 2022
+        List<PrayerTime> prayerTimes = new ArrayList<>();
+        for(Map.Entry<String, Object> mp : sx.entrySet()){
+            String tString = (String) mp.getValue();
+            prayerTimes.add(new PrayerTime(mp.getKey(), tString.substring(11,19)));
+        }
+
+        Collections.sort(prayerTimes);
+
+
         int counter = 0;
-        for (double pray : prayers) {
+        for(PrayerTime p: prayerTimes){
+            Log.d("String_date::name", p.getName()+"");
             counter++;
-            if (hourNow < Calculators.extractHour(pray)) {
+            if (hourNow < p.getHour()) {
                 break;
             } else {
-                if (hourNow == Calculators.extractHour(pray)) {
-                    if (minsNow < Calculators.extractMinutes(pray)) {
+                if (hourNow == p.getHour()) {
+                    if (minsNow < p.getMinute()) {
                         break;
                     }
                 }
             }
         }
+        /**for (double pray : prayers) {
+         Log.d("String_date::PDCH", pray+"");
+         counter++;
+         if (hourNow < Calculators.extractHour(pray)) {
+         break;
+         } else {
+         if (hourNow == Calculators.extractHour(pray)) {
+         if (minsNow < Calculators.extractMinutes(pray)) {
+         break;
+         }
+         }
+         }
+         }*/
 
-        for (int i = (counter - 1); i < prayers.length; i++) {
+        for (int i = (counter - 1); i < prayerTimes.size(); i++) {
             //alarm for every prayer
-            Alarms.setNotificationAlarm(getApplicationContext(), Calculators.extractHour(prayers[i])
-                    , Calculators.extractMinutes(prayers[i]), PRAYER_SIG + i, i + "");
+            Alarms.setNotificationAlarm(getApplicationContext(), prayerTimes.get(i).getHour()
+                    , prayerTimes.get(i).getMinute(), PRAYER_SIG + i, i + "");
 
-            Log.d("String_date" , Calculators.extractHour(prayers[i])+" "+Calculators.extractMinutes(prayers[i]));
+            Log.d("String_date" , prayerTimes.get(i).getHour()+" "+prayerTimes.get(i).getMinute());
 
             if (ConfigPreferences.getAzkarMood(this) == true) {
                 //alarm for morning Azkar
                 if (i == 0)
-                    Alarms.setAlarmForAzkar(getApplicationContext(), Calculators.extractHour(prayers[i])
-                            , Calculators.extractMinutes(prayers[i]) + 30, AZKAR_SIG + i , "1");
+                    Alarms.setAlarmForAzkar(getApplicationContext(), prayerTimes.get(i).getHour()
+                            , prayerTimes.get(i).getMinute() + 30, AZKAR_SIG + i , "1");
                 //alarm for night Azkar
                 if (i == 3)
-                    Alarms.setAlarmForAzkar(getApplicationContext(), Calculators.extractHour(prayers[i])
-                            , Calculators.extractMinutes(prayers[i])+35, AZKAR_SIG + i , "2");
+                    Alarms.setAlarmForAzkar(getApplicationContext(), prayerTimes.get(i).getHour()
+                            , prayerTimes.get(i).getMinute()+35, AZKAR_SIG + i , "2");
             }
 
         }
+
+        /**   for (int i = (counter - 1); i < prayers.length; i++) {
+         //alarm for every prayer
+         Alarms.setNotificationAlarm(getApplicationContext(), Calculators.extractHour(prayers[i])
+         , Calculators.extractMinutes(prayers[i]), PRAYER_SIG + i, i + "");
+
+         Log.d("String_date" , Calculators.extractHour(prayers[i])+" "+Calculators.extractMinutes(prayers[i]));
+
+         if (ConfigPreferences.getAzkarMood(this) == true) {
+         //alarm for morning Azkar
+         if (i == 0)
+         Alarms.setAlarmForAzkar(getApplicationContext(), Calculators.extractHour(prayers[i])
+         , Calculators.extractMinutes(prayers[i]) + 30, AZKAR_SIG + i , "1");
+         //alarm for night Azkar
+         if (i == 3)
+         Alarms.setAlarmForAzkar(getApplicationContext(), Calculators.extractHour(prayers[i])
+         , Calculators.extractMinutes(prayers[i])+35, AZKAR_SIG + i , "2");
+         }
+
+         }*/
 
         //reset widget for new changes
         sendBroadcast(new Intent().setAction("prayer.information.change"));
