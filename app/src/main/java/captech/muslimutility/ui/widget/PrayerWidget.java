@@ -132,8 +132,14 @@ public class PrayerWidget extends AppWidgetProvider {
                                     , context.getString(R.string.sunrize_prayer) + " " + Calculators.extractPrayTime(context, prayers[1])));
                             break;
                         case 3:
+                            Calendar cal = Calendar.getInstance();
+                            boolean isFriday = cal.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY;
+                            // changes the
+
                             remoteViews.setTextViewText(R.id.textView7, NumbersLocal.convertNumberType(context
-                                    , (georgianDate.weekDay() != 5 ? context.getString(R.string.zuhr_prayer) : context.getString(R.string.jomma_prayer)) + " " + Calculators.extractPrayTime(context, prayers[2])));
+                                    , (!isFriday ? context.getString(R.string.zuhr_prayer) : context.getString(R.string.jomma_prayer)) + " " + Calculators.extractPrayTime(context, prayers[2])));
+                            /**remoteViews.setTextViewText(R.id.textView7, NumbersLocal.convertNumberType(context
+                             , (georgianDate.weekDay() != 5 ? context.getString(R.string.zuhr_prayer) : context.getString(R.string.jomma_prayer)) + " " + Calculators.extractPrayTime(context, prayers[2])));*/
                             break;
                         case 4:
                             remoteViews.setTextViewText(R.id.textView7, NumbersLocal.convertNumberType(context

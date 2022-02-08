@@ -648,6 +648,39 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cc11"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/prayer_split_h"
+            android:layout_marginRight="@dimen/prayer_split_h"
+            android:layout_marginTop="@dimen/prayer_split_h"
+            android:layout_weight="1"
+            card_view:cardCornerRadius="10dp">
+
+            <LinearLayout
+                android:id="@+id/mn1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/drawer_back"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/donation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-light"
+                    android:gravity="center"
+                    android:text="@string/fajr"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/mid" />
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
     </LinearLayout>
 
     <!-- TODO: Update blank fragment layout -->

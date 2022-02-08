@@ -55,7 +55,7 @@ public class TimingsFragment extends Fragment {
     private TextView monthDay, monthView, weekDay,
             HmonthDay, HmonthView, country, city,
             sunrise, magrib, isha, salahNow, remain, yeartxt, dohaurdu, maghriburdu, ishaurdu,
-            fajrEnTxt, sunriseEnTxt, zuhrEnTxt, asrEnTxt, magribEnTxt, ishaEnTxt, mosqueName;
+            fajrEnTxt, sunriseEnTxt, zuhrEnTxt, asrEnTxt, magribEnTxt, ishaEnTxt, mosqueName, donation;
     public static TextView fajr, zuhr, asr, fajrurdu, zohrurdu, asrurdu;
     public static CardView c1, c2, c3, c4, c5, c6;
     private LinearLayout pray1, pray2, pray3, pray4, pray5, pray6;
@@ -69,6 +69,7 @@ public class TimingsFragment extends Fragment {
     Typeface Roboto_Bold, Roboto_Light, Roboto_Reg, Roboto_Thin, ProximaNovaReg, ProximaNovaBold, tf;
     TelephonyManager manager;
     String flag = "0";
+    private boolean isFriday;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -161,6 +162,7 @@ public class TimingsFragment extends Fragment {
         fajr.setAnimation(animation);
         sunrise = (TextView) rootView.findViewById(R.id.sunriseTime);
         mosqueName = (TextView) rootView.findViewById(R.id.mosque_name);
+        donation = (TextView) rootView.findViewById(R.id.donation);
         sunrise.setAnimation(animation);
         zuhr = (TextView) rootView.findViewById(R.id.zuhrTime);
         zuhr.setAnimation(animation);
@@ -259,15 +261,29 @@ public class TimingsFragment extends Fragment {
 
     }
 
-    Date fajrDate, sunriseDate, duhrDate, asrDate, maghrebDate, ishaDate, midNightDate;
+    Date fajrDate, sunriseDate, duhrDate, asrDate, maghrebDate, ishaDate, midNightDate, fridayDate;
 
     private void timingsUpdate()  {
         try {
+            Calendar cal = Calendar.getInstance();
+            isFriday = cal.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY;
+            // changes the
+            if (isFriday) {
+                zuhrEnTxt.setText("Jummah Prayer");
+            } else {
+                zuhrEnTxt.setText("Zuhr");
+            }
+
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
             mosqueName.setText(preferences.getString("mosquename", "Enter Mosque Code"));
+            donation.setText(preferences.getString("donation", ""));
             fajr.setText(preferences.getString("fajr", ""));
             sunrise.setText(preferences.getString("sunset", ""));
-            zuhr.setText(preferences.getString("zohr", ""));
+            if (isFriday) {
+                zuhr.setText(preferences.getString("friday", ""));
+            } else {
+                zuhr.setText(preferences.getString("zohr", ""));
+            }
             asr.setText(preferences.getString("asr", ""));
             magrib.setText(preferences.getString("maghrib", ""));
             isha.setText(preferences.getString("isha", ""));
@@ -279,7 +295,7 @@ public class TimingsFragment extends Fragment {
 
             //DateFormat formatter = new SimpleDateFormat("yyyy.MM.d hh:mm a");
 
-            DateFormat formatter = new SimpleDateFormat("yyyy.MM.d hh:mm");
+            DateFormat formatter = new SimpleDateFormat("yyyy.MM.d hh:mm a");
             String dateString = "";
             dateString = preferences.getString("ifajr", currentDate + " " + String.valueOf(t.get(2)));
             Log.d("f",dateString);
@@ -299,8 +315,13 @@ public class TimingsFragment extends Fragment {
             dateString = preferences.getString("iisha", currentDate + " " + String.valueOf(t.get(7)));
             Log.d("i",dateString);
             ishaDate = (Date)formatter.parse(dateString);
+            dateString = preferences.getString("ifriday", currentDate + " " + String.valueOf(t.get(8)));
+            Log.d("fr",dateString);
+            fridayDate = (Date)formatter.parse(dateString);
 
-
+            if (isFriday) {
+                duhrDate = fridayDate;
+            }
 
 
             Log.d("TIMETIEN::1",String.valueOf(currentDate));
@@ -318,6 +339,8 @@ public class TimingsFragment extends Fragment {
             Log.d("Magrib",String.valueOf(format.format(maghrebDate)));
             Log.d("Isha",String.valueOf(ishaDate));
             Log.d("Isha",String.valueOf(format.format(ishaDate)));
+            Log.d("Friday",String.valueOf(fridayDate));
+            Log.d("Friday",String.valueOf(format.format(fridayDate)));
 
             MosqueTimings.addMosqueTiming("fajr", String.valueOf(fajrDate));
             MosqueTimings.addMosqueTiming("sunrise", String.valueOf(sunriseDate));
@@ -331,9 +354,17 @@ public class TimingsFragment extends Fragment {
             e.printStackTrace();
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
             mosqueName.setText(preferences.getString("mosquename", "My Mosque"));
+            donation.setText(preferences.getString("donation", ""));
             fajr.setText(preferences.getString("fajr", ""));
             sunrise.setText(preferences.getString("sunset", ""));
-            zuhr.setText(preferences.getString("zohr", ""));
+            //zuhr.setText(preferences.getString("zohr", ""));
+            if (isFriday) {
+                zuhrEnTxt.setText("Jummah Prayer");
+                zuhr.setText(preferences.getString("friday", ""));
+            } else {
+                zuhrEnTxt.setText("Zuhr");
+                zuhr.setText(preferences.getString("zohr", ""));
+            }
             asr.setText(preferences.getString("asr", ""));
             magrib.setText(preferences.getString("maghrib", ""));
             isha.setText(preferences.getString("isha", ""));

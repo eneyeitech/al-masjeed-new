@@ -13,6 +13,7 @@ import android.os.IBinder;
 import androidx.core.app.NotificationCompat;
 import android.util.Log;
 
+import androidx.core.app.NotificationManagerCompat;
 import captech.muslimutility.R;
 import captech.muslimutility.database.ConfigPreferences;
 import captech.muslimutility.ui.activity.AzkarActivity;
@@ -20,6 +21,7 @@ import captech.muslimutility.utility.MindtrackLog;
 
 public class AzkarNotification extends Service {
     private String Azkar;
+    public static final String CHANNEL_ID = "#180";
 
 
     @Override
@@ -57,7 +59,7 @@ public class AzkarNotification extends Service {
                             .putExtra("title", Azkar.equals("1") ? getString(R.string.sabah) : getString(R.string.massa)), 0);
 
             //azkar notification builder
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(this).
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID).
                     setSmallIcon(R.drawable.roundicon)
                     .setPriority(Notification.PRIORITY_MAX)
                     .setContentText(Azkar.equals("1") ? getString(R.string.sabah) : getString(R.string.massa))
@@ -68,8 +70,11 @@ public class AzkarNotification extends Service {
                     .setColor(Color.parseColor("#FF1760AE"))
                     .setContentIntent(intent);
 
-            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-            notificationManager.notify(1001001, builder.build());
+
+            NotificationManagerCompat mNotificationManager = NotificationManagerCompat.from(this);
+            mNotificationManager.notify(1001001, builder.build());
+            //NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            //notificationManager.notify(1001001, builder.build());
         } catch (Exception e) {
             e.printStackTrace();
         }

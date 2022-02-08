@@ -4,14 +4,21 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
+
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import android.util.Log;
+
+import java.util.Calendar;
 
 import androidx.core.app.NotificationManagerCompat;
 import captech.muslimutility.R;
@@ -29,6 +36,7 @@ public class PrayerNotification extends Service {
     public static final String CHANNEL_NAME = "Prayer Time Notification";
     public static final String CHANNEL_DESCRIPTION = "New Implementation";
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         prayingName = intent.getStringExtra("prayName");
@@ -54,6 +62,7 @@ public class PrayerNotification extends Service {
     /**
      * Function to show prayer notification
      */
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void showNotification() {
 
         switch (prayingName) {
@@ -68,8 +77,12 @@ public class PrayerNotification extends Service {
                 MindtrackLog.add(prayingName);
                 break;
             case "2":
+                Calendar cal = Calendar.getInstance();
+                boolean isFriday = cal.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY;
+                // changes the
                 HGDate hgDate = new HGDate();
-                prayingName = hgDate.weekDay() != 5 ? this.getString(R.string.zuhr_prayer) : this.getString(R.string.jomma_prayer);
+                prayingName = !isFriday ? this.getString(R.string.zuhr_prayer) : this.getString(R.string.jomma_prayer);
+                //prayingName = hgDate.weekDay() != 5 ? this.getString(R.string.zuhr_prayer) : this.getString(R.string.jomma_prayer);
 
                 prayerType = PrayerImageActivity.MOSQUE_DAY;
                 MindtrackLog.add(prayingName);
@@ -97,32 +110,54 @@ public class PrayerNotification extends Service {
         }
 
 
+
         NotificationCompat.Builder builder;
         boolean aboveLollipopFlag = android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
         PendingIntent intent = PendingIntent.getActivity(this, 0,
                 new Intent(this, MainActivity.class), 0);
+        Uri sound = null;
+        AudioAttributes attributes = null;
+        sound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getApplicationContext().getPackageName() + "/" + R.raw.yusuf_islam);  //Here is FILE_NAME is the name of file that you want to play
+        attributes = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                .build();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            sound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getApplicationContext().getPackageName() + "/" + R.raw.yusuf_islam);  //Here is FILE_NAME is the name of file that you want to play
+            attributes = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                    .build();
+        }
         if (ConfigPreferences.getLedNotification(this)) {
+            Log.d("Audio-1","1");
             builder = new NotificationCompat.Builder(this, CHANNEL_ID).
                     setSmallIcon(aboveLollipopFlag ? R.drawable.notification_white : R.drawable.roundicon)
                     .setPriority(Notification.PRIORITY_MAX)
                     .setContentText(prayingName)
                     .setContentTitle(getString(R.string.remember))
-                    .setDefaults(Notification.DEFAULT_SOUND)
+                    //.setDefaults(Notification.DEFAULT_SOUND)
                     .setLights(0xFF00ff00, 1000, 1000)
                     .setAutoCancel(true)
                     .setColor(Color.parseColor("#FF1760AE"))
                     .setContentIntent(intent);
+            builder.setSound(sound, AudioManager.STREAM_ALARM);
+            builder.setOnlyAlertOnce(true);
         } else {
+            Log.d("Audio-2","2");
             builder = new NotificationCompat.Builder(this, CHANNEL_ID).
                     setSmallIcon(aboveLollipopFlag ? R.drawable.notification_white : R.drawable.roundicon)
                     .setPriority(Notification.PRIORITY_MAX)
                     .setContentText(prayingName)
                     .setContentTitle(getString(R.string.remember))
-                    .setDefaults(Notification.DEFAULT_SOUND)
+                    //.setDefaults(Notification.DEFAULT_SOUND)
                     .setAutoCancel(true)
                     .setColor(Color.parseColor("#FF1760AE"))
                     .setContentIntent(intent);
+            builder.setSound(sound, AudioManager.STREAM_ALARM);
+            builder.setOnlyAlertOnce(true);
         }
+
+
+
         NotificationManagerCompat mNotificationManager = NotificationManagerCompat.from(this);
         mNotificationManager.notify(0, builder.build());
         //NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);

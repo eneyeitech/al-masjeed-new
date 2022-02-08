@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,6 +17,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.media.AudioAttributes;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -107,9 +109,10 @@ public class MainActivity extends AppCompatActivity implements com.google.androi
     TabLayout tabLayout;
     public DBManager dbManager;
     private String mosque_code = "";
+    private String donation = "";
 
     private List found = null;
-    private TextView name, fajr, sunrise, zuhr, asr, magrib, isha;
+    private TextView name, fajr, sunrise, zuhr, asr, magrib, isha, jummaah;
     private SimpleDateFormat format;
 
     public static final String CHANNEL_ID = "#180";
@@ -287,23 +290,38 @@ public class MainActivity extends AppCompatActivity implements com.google.androi
         }
 
         NotificationManager notificationManager = null;
+        Uri sound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getApplicationContext().getPackageName() + "/" + R.raw.yusuf_islam);  //Here is FILE_NAME is the name of file that you want to play
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
                     CHANNEL_ID,
                     CHANNEL_NAME,
-                    NotificationManager.IMPORTANCE_DEFAULT
+                    NotificationManager.IMPORTANCE_HIGH
             );
+
+            AudioAttributes attributes = new AudioAttributes.Builder()
+                    .setContentType(android.media.AudioAttributes.CONTENT_TYPE_SPEECH)
+                    .setUsage(android.media.AudioAttributes.USAGE_NOTIFICATION)
+                    .build();
+
+            /**NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID,
+                    getApplicationContext().getString(R.string.app_name),
+                    NotificationManager.IMPORTANCE_HIGH);*/
+            Log.d("Audio","1");
+            // Configure the notification channel.
             channel.setDescription(CHANNEL_DESCRIPTION);
+            channel.enableLights(true);
+            channel.enableVibration(true);
+            channel.setSound(sound, attributes); // This is IMPORTANT
             notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         } else {
-
+            Log.d("Audio","2");
             notificationManager =
                     (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+        /**if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
                 && !notificationManager.isNotificationPolicyAccessGranted()) {
 
             Intent intent = new Intent(
@@ -311,7 +329,7 @@ public class MainActivity extends AppCompatActivity implements com.google.androi
                             .ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
 
             startActivity(intent);
-        }
+        }*/
 
 
 
@@ -348,7 +366,7 @@ public class MainActivity extends AppCompatActivity implements com.google.androi
             @Override
             public void run(){
                 //you call here
-                String range = "Sheet1!A2:H";
+                String range = "Sheet1!A2:J";
                 ValueRange result = null;
                 try {
                     result = sheetsService.spreadsheets().values()
@@ -365,9 +383,10 @@ public class MainActivity extends AppCompatActivity implements com.google.androi
                     for (List row : values) {
                         // Print columns A and E, which correspond to indices 0 and 4.
                         String code = (String) row.get(1);
+
                         if(code.toLowerCase().equals(mc.toLowerCase())) {
                             found = row;
-
+                            donation = (String) row.get(9);
                         }
 
                     }
@@ -387,17 +406,18 @@ public class MainActivity extends AppCompatActivity implements com.google.androi
                         sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
                         String currentDate = sdf.format(new Date());
 
-                        String fStr = "",sStr="",zStr="",aStr="",mStr="",iStr="";
+                        String fStr = "",sStr="",zStr="",aStr="",mStr="",iStr="", frStr;
 
-                        DateFormat formatter = new SimpleDateFormat("yyyy.MM.d hh:mm");
+                        DateFormat formatter = new SimpleDateFormat("yyyy.MM.d hh:mm a");
 
-                        final Date fajrDate, sunriseDate, zuhrDate, asrDate, magribDate, ishaDate;
+                        final Date fajrDate, sunriseDate, zuhrDate, asrDate, magribDate, ishaDate, fridayDate;
                         fStr = currentDate + " " + found.get(2);
                         sStr = currentDate + " " + found.get(3);
                         zStr = currentDate + " " + found.get(4);
                         aStr = currentDate + " " + found.get(5);
                         mStr = currentDate + " " + found.get(6);
                         iStr = currentDate + " " + found.get(7);
+                        frStr = currentDate + " " + found.get(8);
                         //sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                         //SharedPreferences.Editor editor = sharedpreferences.edit();
 
@@ -407,6 +427,7 @@ public class MainActivity extends AppCompatActivity implements com.google.androi
                         editor.putString("iasr", aStr);
                         editor.putString("imaghrib", mStr);
                         editor.putString("iisha", iStr);
+                        editor.putString("ifriday", frStr);
 
                         try {
                             fajrDate = (Date)formatter.parse(fStr);
@@ -415,6 +436,7 @@ public class MainActivity extends AppCompatActivity implements com.google.androi
                             asrDate = (Date)formatter.parse(aStr);
                             magribDate = (Date)formatter.parse(mStr);
                             ishaDate = (Date)formatter.parse(iStr);
+                            fridayDate = (Date)formatter.parse(frStr);
 
                             Log.d("MA::Fajr",String.valueOf(fajrDate));
                             Log.d("MA::Fajr",String.valueOf(format.format(fajrDate)));
@@ -429,6 +451,15 @@ public class MainActivity extends AppCompatActivity implements com.google.androi
                             Log.d("MA::Isha",String.valueOf(ishaDate));
                             Log.d("MA::Isha",iStr);
                             Log.d("MA::Isha",String.valueOf(format.format(ishaDate)));
+                            Log.d("MA::Friday",frStr);
+                            Log.d("MA::Friday",String.valueOf(format.format(fridayDate)));
+                            Log.d("Donation Text :: ", donation);
+
+                            Calendar cal = Calendar.getInstance();
+
+                            boolean friday = cal.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY;
+
+                            Log.d("Is Friday :: ", friday + "");
 
                             editor.putString("mosquename", String.valueOf( found.get(0)));
                             editor.putString("fajr", format.format(fajrDate));
@@ -437,7 +468,9 @@ public class MainActivity extends AppCompatActivity implements com.google.androi
                             editor.putString("asr", format.format(asrDate));
                             editor.putString("maghrib", format.format(magribDate));
                             editor.putString("isha", format.format(ishaDate));
+                            editor.putString("friday", format.format(fridayDate));
                             editor.putString("mosquecode",mosque_code);
+                            editor.putString("donation",donation);
 
                             /**editor.putString("mosquename", String.valueOf( found.get(0)));
                             editor.putString("fajr", format.format(fajrDate));

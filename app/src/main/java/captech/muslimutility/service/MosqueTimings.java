@@ -61,6 +61,7 @@ public class MosqueTimings {
             mosqueDefault.add("15:35 PM");
             mosqueDefault.add("18:10 PM");
             mosqueDefault.add("19:19 PM");
+            mosqueDefault.add("12:30 PM");
 
             return mosqueDefault;
         }
@@ -82,7 +83,7 @@ public class MosqueTimings {
     public static void setTimings(List<Object> t){
         timings = t;
 
-        Log.d("SUCCESS--TIMINGS::1", "" + t.get(0) + "," + t.get(1) + "," + t.get(2) + "," + t.get(3) + "," + t.get(4) + "," + t.get(5) + "," + t.get(6)+ "," + t.get(7));
+        Log.d("SUCCESS--TIMINGS::1", "" + t.get(0) + "," + t.get(1) + "," + t.get(2) + "," + t.get(3) + "," + t.get(4) + "," + t.get(5) + "," + t.get(6)+ "," + t.get(7) + "," + t.get(8));
 
 
     }
