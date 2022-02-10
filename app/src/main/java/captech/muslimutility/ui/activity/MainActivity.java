@@ -422,10 +422,10 @@ public class MainActivity extends AppCompatActivity implements com.google.androi
                         //SharedPreferences.Editor editor = sharedpreferences.edit();
 
                         editor.putString("ifajr", fStr);
-                        editor.putString("isunset", sStr);
+                        editor.putString("isunrise", sStr);
                         editor.putString("izohr", zStr);
                         editor.putString("iasr", aStr);
-                        editor.putString("imaghrib", mStr);
+                        editor.putString("imagrib", mStr);
                         editor.putString("iisha", iStr);
                         editor.putString("ifriday", frStr);
 

@@ -411,6 +411,7 @@ public class TimingsFragment extends Fragment {
             nextPray = getString(R.string.sunrise);
             lastDate = fajrDate;
             nextDate = sunriseDate;
+            Log.d("mxm", 1+"");
         } else if (current.after(sunriseDate) && current.before(duhrDate)) {
             pray3.setBackgroundColor(getResources().getColor(R.color.contrast));
             //zohrurdu.setTextColor(getResources().getColor(R.color.white));
@@ -419,6 +420,7 @@ public class TimingsFragment extends Fragment {
             nextPray = getString(R.string.zuhr);
             lastDate = sunriseDate;
             nextDate = duhrDate;
+            Log.d("mxm", 2+"");
         } else if (current.after(duhrDate) && current.before(asrDate)) {
             pray4.setBackgroundColor(getResources().getColor(R.color.contrast));
             //asrurdu.setTextColor(getResources().getColor(R.color.white));
@@ -427,6 +429,7 @@ public class TimingsFragment extends Fragment {
             nextPray = getString(R.string.asr);
             lastDate = duhrDate;
             nextDate = asrDate;
+            Log.d("mxm", 3+"");
         } else if (current.after(asrDate) && current.before(maghrebDate)) {
             pray5.setBackgroundColor(getResources().getColor(R.color.contrast));
             //maghriburdu.setTextColor(getResources().getColor(R.color.white));
@@ -435,6 +438,7 @@ public class TimingsFragment extends Fragment {
             nextPray = getString(R.string.magrib);
             lastDate = asrDate;
             nextDate = maghrebDate;
+            Log.d("mxm", 4+"");
         } else if (current.after(maghrebDate) && current.before(ishaDate)) {
             pray6.setBackgroundColor(getResources().getColor(R.color.contrast));
             //ishaurdu.setTextColor(getResources().getColor(R.color.white));
@@ -443,21 +447,24 @@ public class TimingsFragment extends Fragment {
             nextPray = getString(R.string.isha);
             lastDate = maghrebDate;
             nextDate = ishaDate;
+            Log.d("mxm", 5+"");
         } else {
 
             if (current.after(midNightDate) && current.before(fajrDate)) {
                 lastDate = getPrayerforPreviousDay().get()[5];
                 nextDate = fajrDate;
+                Log.d("mxm", 6+"");
             } else {
                 lastDate = ishaDate;
                 nextDate = getPrayerforNextDay().get()[0];
+                Log.d("mxm", 7+"");
             }
             pray1.setBackgroundColor(getResources().getColor(R.color.contrast));
             //fajrurdu.setTextColor(getResources().getColor(R.color.white));
             //fajrEnTxt.setTextColor(getResources().getColor(R.color.white));
             //fajr.setTextColor(getResources().getColor(R.color.white));
             nextPray = getString(R.string.fajr);
-
+            Log.d("mxm", 8+"");
         }
 
         salahNow.setText(NumbersLocal.convertNumberType(getContext(), nextPray + " " + format.format(nextDate)));
@@ -466,6 +473,10 @@ public class TimingsFragment extends Fragment {
         Log.i("DATE_TAg", "last : " + format.format(lastDate));
         Log.i("DATE_TAg", "current : " + format.format(current));
         Log.i("DATE_TAg", "end : " + format.format(nextDate));
+        Log.i("DATE_TAg", "midnight : " + format.format(midNightDate));
+        Log.i("DATE_TAg", "asr : " + format.format(asrDate));
+        Log.i("DATE_TAg", "magrib : " + format.format(maghrebDate));
+        Log.i("DATE_TAg", "isha : " + format.format(ishaDate));
 
 
         updateTimer(current);

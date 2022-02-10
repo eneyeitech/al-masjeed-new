@@ -44,6 +44,14 @@ public class Alarms {
         alarmReceiver.putExtras(details);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, alarmReceiver, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        /**if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            // kitkat...
+            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,
+                    calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        } else {
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+                    calendar.getTimeInMillis(), 1000 * 60 * 60 * 24, pendingIntent);
+        }*/
     }
 
     public static void setAlarmForAzkar(Context context, int hour, int min, int id , String type) {

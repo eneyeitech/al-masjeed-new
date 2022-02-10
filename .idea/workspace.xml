@@ -14,17 +14,13 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="110fe56c-623d-4b20-8d8c-69e00a238394" name="Default" comment="Fixed Notification: Alarm sounds 5 mins before prayer time.">
+    <list default="true" id="110fe56c-623d-4b20-8d8c-69e00a238394" name="Default" comment="Fixed Notification: Can now play custom sound.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/config/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/config/Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/service/AzkarNotification.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/service/AzkarNotification.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/service/MosqueTimings.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/service/MosqueTimings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/service/PrayerNotification.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/service/PrayerNotification.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/service/SilentMoodAlarm.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/service/SilentMoodAlarm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/ui/activity/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/ui/activity/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/ui/fragments/TimingsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/ui/fragments/TimingsFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/ui/widget/PrayerWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/ui/widget/PrayerWidget.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_timings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_timings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/utility/Alarms.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/utility/Alarms.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +31,7 @@
     <option name="testRunner" value="GRADLE" />
     <option name="delegatedBuild" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[localhost:28984]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[R9HR308T3RJ]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -250,13 +246,21 @@
       <option name="project" value="LOCAL" />
       <updated>1641223260920</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Fixed Notification: Can now play custom sound.">
+      <created>1644326490739</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1644326490739</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fixed Notification" />
     <MESSAGE value="Fixed Notification: Alarm sounds 5 mins before prayer time." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed Notification: Alarm sounds 5 mins before prayer time." />
+    <MESSAGE value="Fixed Notification: Can now play custom sound." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed Notification: Can now play custom sound." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

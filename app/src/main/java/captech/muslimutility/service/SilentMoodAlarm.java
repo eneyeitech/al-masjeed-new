@@ -17,9 +17,11 @@ public class SilentMoodAlarm extends WakefulBroadcastReceiver {
         MindtrackLog.add("Silent Mood");
 
         AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-        mAudioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+        //mAudioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+        mAudioManager.setRingerMode(0);
         if (ConfigPreferences.getVibrationMode(context))
-            mAudioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+            //mAudioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+            mAudioManager.setRingerMode(1);
         Alarms.NormalAudio(context);
     }
 }
