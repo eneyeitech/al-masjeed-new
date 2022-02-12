@@ -3,6 +3,7 @@ package captech.muslimutility.service;
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -15,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.RequiresApi;
 import captech.muslimutility.calculator.prayer.PrayerTimeCalculator;
 import captech.muslimutility.database.ConfigPreferences;
 import captech.muslimutility.model.LocationInfo;
@@ -35,6 +37,7 @@ public class PrayingDayCalculateHandler extends IntentService {
         return null;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onHandleIntent(Intent intent) {
         SimpleDateFormat nsdf = new SimpleDateFormat("yyyy-MM-dd");

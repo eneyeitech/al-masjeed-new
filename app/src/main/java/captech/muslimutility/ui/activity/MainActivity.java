@@ -529,8 +529,19 @@ public class MainActivity extends AppCompatActivity implements com.google.androi
 
                         @Override
                         public void run() {
+                            Log.d("Network Status :: ",  "No Network");
 
-                            Toast.makeText(getApplicationContext(),"No Network",Toast.LENGTH_LONG);
+                            FragmentManager fragmentManager = getSupportFragmentManager();
+                            fragmentManager.beginTransaction()
+                                    .replace(R.id.fragment_timings, TimingsFragment.class, null, "tag")
+                                    .setReorderingAllowed(true)
+                                    .addToBackStack(null)
+                                    .commit();
+
+                            TimingsFragment fragment = (TimingsFragment) fragmentManager.findFragmentByTag("timings");
+                            getApplicationContext().startService(new Intent(getApplicationContext(), PrayingDayCalculateHandler.class));
+
+                            Toast.makeText(getApplicationContext(),"No/Poor Network",Toast.LENGTH_LONG).show();
                         }
                     });
                     e.printStackTrace();

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.RequiresApi;
 import captech.muslimutility.service.AzkarAlarm;
 import captech.muslimutility.service.PrayerAlarm;
 import captech.muslimutility.service.PrayingDayCalculateAlarm;
@@ -31,6 +32,7 @@ public class Alarms {
         return false;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public static void setNotificationAlarm(Context context, int hour, int min, int id, String extra) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
@@ -43,15 +45,13 @@ public class Alarms {
         Intent alarmReceiver = new Intent(context, PrayerAlarm.class);
         alarmReceiver.putExtras(details);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, alarmReceiver, PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-        /**if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        //alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             // kitkat...
-            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,
-                    calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
         } else {
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-                    calendar.getTimeInMillis(), 1000 * 60 * 60 * 24, pendingIntent);
-        }*/
+            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        }
     }
 
     public static void setAlarmForAzkar(Context context, int hour, int min, int id , String type) {

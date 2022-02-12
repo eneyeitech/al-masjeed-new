@@ -14,12 +14,10 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="110fe56c-623d-4b20-8d8c-69e00a238394" name="Default" comment="Fixed Notification: Can now play custom sound.">
+    <list default="true" id="110fe56c-623d-4b20-8d8c-69e00a238394" name="Default" comment="Minor fix: key for device incorrect.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/service/SilentMoodAlarm.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/service/SilentMoodAlarm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/service/PrayingDayCalculateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/service/PrayingDayCalculateHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/ui/activity/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/ui/activity/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/ui/fragments/TimingsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/ui/fragments/TimingsFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/utility/Alarms.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/utility/Alarms.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -31,7 +29,7 @@
     <option name="testRunner" value="GRADLE" />
     <option name="delegatedBuild" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[R9HR308T3RJ]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\eneye\.android\avd\Android_Accelerated_x86_Oreo.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -88,6 +86,9 @@
   <component name="PropertiesComponent">
     <property name="ApkExportedModule" value="muslimorganizer.app" />
     <property name="BundleExportedModule" value="muslimorganizer.app" />
+    <property name="DEBUGGABLE_DEVICE" value="samsung-sm_a025f-R9HR308T3RJ" />
+    <property name="DEBUGGABLE_PROCESS" value="com.captech.muslimutility" />
+    <property name="DEBUGGER_ID" value="Auto" />
     <property name="ExportApk.ApkPath" value="C:\Users\eneye\Downloads\raw_and\apk" />
     <property name="ExportApk.BuildType" value="release" />
     <property name="ExportApk.BuildVariants" value="release" />
@@ -96,6 +97,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="SHOW_ALL_PROCESSES" value="true" />
     <property name="android-custom-viewC:/Users/eneye/.gradle/caches/modules-2/files-2.1/com.google.android.material/material/1.3.0/b42a5159ef2c670d26ce08246ec5aaf8f92e5a42/material-1.3.0-sources.jar!/com/google/android/material/tabs/TabLayout.java_SELECTED" value="TabLayout" />
     <property name="android-custom-viewC:/Users/eneye/Downloads/raw_and/muslimorganizer/muslimorganizer/app/src/main/java/captech/muslimutility/ui/views/MarqueeTextView.java_SELECTED" value="MarqueeTextView" />
     <property name="android.project.structure.last.selected" value="Ads" />
@@ -253,25 +255,22 @@
       <option name="project" value="LOCAL" />
       <updated>1644326490739</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Minor fix: key for device incorrect.">
+      <created>1644502234617</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1644502234617</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fixed Notification" />
     <MESSAGE value="Fixed Notification: Alarm sounds 5 mins before prayer time." />
     <MESSAGE value="Fixed Notification: Can now play custom sound." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed Notification: Can now play custom sound." />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/captech/muslimutility/ui/fragments/TimingsFragment.java</url>
-          <line>402</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Minor fix: key for device incorrect." />
+    <option name="LAST_COMMIT_MESSAGE" value="Minor fix: key for device incorrect." />
   </component>
   <component name="masterDetails">
     <states>
