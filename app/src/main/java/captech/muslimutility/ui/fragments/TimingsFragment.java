@@ -401,7 +401,8 @@ public class TimingsFragment extends Fragment {
         Date current = Calendar.getInstance().getTime();
 
         Log.d("Current Time::TF", String.valueOf(current));
-
+        tomorrowDate();
+        previousDate();
 
         if (current.after(fajrDate) && current.before(sunriseDate)) {
             pray2.setBackgroundColor(getResources().getColor(R.color.contrast));
@@ -449,14 +450,17 @@ public class TimingsFragment extends Fragment {
             nextDate = ishaDate;
             Log.d("mxm", 5+"");
         } else {
-
             if (current.after(midNightDate) && current.before(fajrDate)) {
-                lastDate = getPrayerforPreviousDay().get()[5];
+                //lastDate = getPrayerforPreviousDay().get()[5];
+                lastDate = previousDate();
+                //lastDate = ishaDate;
                 nextDate = fajrDate;
                 Log.d("mxm", 6+"");
             } else {
                 lastDate = ishaDate;
-                nextDate = getPrayerforNextDay().get()[0];
+                //nextDate = fajrDate;
+                nextDate = tomorrowDate();
+                //nextDate = getPrayerforNextDay().get()[0];
                 Log.d("mxm", 7+"");
             }
             pray1.setBackgroundColor(getResources().getColor(R.color.contrast));
@@ -481,6 +485,60 @@ public class TimingsFragment extends Fragment {
 
         updateTimer(current);
 
+    }
+
+    private final long MILLIS_IN_A_DAY = 1000 * 60 * 60 * 24;
+
+    public Date tomorrowDate() {
+        Date now = new Date();
+
+        Date tomorrow = new Date(now.getTime() + MILLIS_IN_A_DAY);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+        String tomorrowDate = sdf.format(tomorrow);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        DateFormat formatter = new SimpleDateFormat("yyyy.MM.d hh:mm a");
+        String dateString = "";
+        dateString = preferences.getString("ifajr", tomorrowDate + " " + String.valueOf(t.get(2)));
+
+        dateString = tomorrowDate + dateString.substring(10);
+        Log.d("tomorrowDate",dateString);
+        Date tmrDate = null;
+        try {
+            tmrDate = (Date)formatter.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return tmrDate;
+    }
+
+    public Date previousDate() {
+        Date now = new Date();
+
+        Date dayBefore = new Date(now.getTime() - MILLIS_IN_A_DAY);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+        String previousDate = sdf.format(dayBefore);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        DateFormat formatter = new SimpleDateFormat("yyyy.MM.d hh:mm a");
+        String dateString = "";
+        dateString = preferences.getString("iisha", previousDate + " " + String.valueOf(t.get(7)));
+
+        dateString = previousDate + dateString.substring(10);
+        Log.d("previousDate",dateString);
+        Date prvDate = null;
+        try {
+            prvDate = (Date)formatter.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return prvDate;
     }
 
     private void removeActiveViews() {

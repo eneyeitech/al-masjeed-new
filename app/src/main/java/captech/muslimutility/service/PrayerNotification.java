@@ -19,6 +19,8 @@ import androidx.core.app.NotificationCompat;
 import android.util.Log;
 
 import java.util.Calendar;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import androidx.core.app.NotificationManagerCompat;
 import captech.muslimutility.R;
@@ -141,6 +143,7 @@ public class PrayerNotification extends Service {
                     .setContentIntent(intent);
             builder.setSound(sound, AudioManager.STREAM_ALARM);
             builder.setOnlyAlertOnce(true);
+            builder.setAutoCancel(true);
         } else {
             Log.d("Audio-2","2");
             builder = new NotificationCompat.Builder(this, CHANNEL_ID).
@@ -154,14 +157,25 @@ public class PrayerNotification extends Service {
                     .setContentIntent(intent);
             builder.setSound(sound, AudioManager.STREAM_ALARM);
             builder.setOnlyAlertOnce(true);
+            builder.setAutoCancel(true);
         }
 
 
 
-        NotificationManagerCompat mNotificationManager = NotificationManagerCompat.from(this);
+        final NotificationManagerCompat mNotificationManager = NotificationManagerCompat.from(this);
         mNotificationManager.notify(0, builder.build());
+        //mNotificationManager.cancelAll();
         //NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         //notificationManager.notify(0, builder.build());
+        TimerTask task = new TimerTask() {
+            public void run() {
+                mNotificationManager.cancelAll();
+            }
+        };
+        Timer timer = new Timer("Timer");
+
+        long delay = 300000L;
+        timer.schedule(task, delay);
     }
 
     @Override

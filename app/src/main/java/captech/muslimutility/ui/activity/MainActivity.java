@@ -331,7 +331,7 @@ public class MainActivity extends AppCompatActivity implements com.google.androi
             startActivity(intent);
         }*/
 
-
+notificationManager.cancelAll();
 
         new AzkarTypes().execute();
 

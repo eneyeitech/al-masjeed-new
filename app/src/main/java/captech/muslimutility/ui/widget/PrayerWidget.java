@@ -11,16 +11,20 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import captech.muslimutility.R;
 import captech.muslimutility.calculator.calendar.HGDate;
 import captech.muslimutility.calculator.prayer.PrayerTimeCalculator;
 import captech.muslimutility.database.ConfigPreferences;
 import captech.muslimutility.model.LocationInfo;
+import captech.muslimutility.model.PrayerTime;
 import captech.muslimutility.service.MosqueTimings;
 import captech.muslimutility.ui.activity.MainActivity;
 import captech.muslimutility.utility.Calculators;
@@ -103,11 +107,43 @@ public class PrayerWidget extends AppWidgetProvider {
                             , context).calculateDailyPrayers_withSunset();
 
                     Calendar c = Calendar.getInstance();
-                    int houreNow = c.get(Calendar.HOUR_OF_DAY);
+                    int hourNow = c.get(Calendar.HOUR_OF_DAY);
                     int minsNow = c.get(Calendar.MINUTE);
-                    int counter = 0;
+                    //int counter = 0;
 
-                    for (double pray : prayers) {
+                    Map<String, Object> sx = MosqueTimings.getMosqueTiming();
+                    String sc = (String) sx.get("fajr");
+                    Log.d("String_date::maghrib1", sc.substring(11,19) + "");
+                    Log.d("String_date::maghrib2", Integer.parseInt(sc.substring(14,16)) + " SIZE "+prayers.length+" hournow "+hourNow+" minutenow " + minsNow);
+
+                    //Sun Jan 02 19:19:00 GMT+01:00 2022
+                    List<PrayerTime> prayerTimes = new ArrayList<>();
+                    for(Map.Entry<String, Object> mp : sx.entrySet()){
+                        String tString = (String) mp.getValue();
+                        prayerTimes.add(new PrayerTime(mp.getKey(), tString.substring(11,19)));
+                    }
+
+                    prayerTimes.add(new PrayerTime("mid", "24:00"));
+
+                    Collections.sort(prayerTimes);
+
+
+                    int counter = 0;
+                    for(PrayerTime p: prayerTimes){
+                        Log.d("String_date::widget", p.getName()+"");
+                        counter++;
+                        if (hourNow < p.getHour()) {
+                            break;
+                        } else {
+                            if (hourNow == p.getHour()) {
+                                if (minsNow < p.getMinute()) {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    /**for (double pray : prayers) {
                         counter++;
                         if (houreNow < Calculators.extractHour(pray)) {
                             break;
@@ -118,7 +154,7 @@ public class PrayerWidget extends AppWidgetProvider {
                                 }
                             }
                         }
-                    }
+                    }*/
 
 
                     //switch to check the next prayer

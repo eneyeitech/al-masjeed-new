@@ -69,6 +69,7 @@ public class PrayingDayCalculateHandler extends IntentService {
             String tString = (String) mp.getValue();
             prayerTimes.add(new PrayerTime(mp.getKey(), tString.substring(11,19)));
         }
+        prayerTimes.add(new PrayerTime("mid", "24:00"));
 
         Collections.sort(prayerTimes);
 
@@ -117,7 +118,7 @@ public class PrayingDayCalculateHandler extends IntentService {
 
             Log.d("String_date" , prayerTimes.get(i).getHour()+" "+prayerTimes.get(i).getMinute());
 
-            if (ConfigPreferences.getAzkarMood(this) == true) {
+            /**if (ConfigPreferences.getAzkarMood(this) == true) {
                 //alarm for morning Azkar
                 if (i == 0)
                     Alarms.setAlarmForAzkar(getApplicationContext(), prayerTimes.get(i).getHour()
@@ -126,7 +127,7 @@ public class PrayingDayCalculateHandler extends IntentService {
                 if (i == 3)
                     Alarms.setAlarmForAzkar(getApplicationContext(), prayerTimes.get(i).getHour()
                             , prayerTimes.get(i).getMinute()+35, AZKAR_SIG + i , "2");
-            }
+            }*/
 
         }
 
