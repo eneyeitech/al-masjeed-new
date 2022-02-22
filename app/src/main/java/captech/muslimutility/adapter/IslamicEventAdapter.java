@@ -54,10 +54,10 @@ public class IslamicEventAdapter extends RecyclerView.Adapter<IslamicEventAdapte
         HGDate hgd = new HGDate();
         hgd.setHigri(Integer.valueOf(date[2]), Integer.valueOf(date[1]), Integer.valueOf(date[0]));
 
-        MobileAds.initialize(context, "ca-app-pub-5379314308386326~5125464320");
+        /*MobileAds.initialize(context, "ca-app-pub-5379314308386326~5125464320");
         mInterstitialAd = new InterstitialAd(context);
         mInterstitialAd.setAdUnitId("ca-app-pub-5379314308386326/9778901499");
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());*/
 
         holder.eventName.setText(event.eventName.trim().equals(context.getString(R.string.milad_al_naby)) ? event.eventName + " " + "ﷺ" : event.eventName);
         holder.textViewurdu.setText(eventurdu.eventName.trim().equals(context.getString(R.string.milad_al_naby)) ? eventurdu.eventName + " " + "ﷺ" : eventurdu.eventName);
@@ -81,7 +81,7 @@ public class IslamicEventAdapter extends RecyclerView.Adapter<IslamicEventAdapte
             @Override
             public void onClick(View v) {
                 if (SharedDataClass.interstitialflagtwo==0){
-                    if (mInterstitialAd.isLoaded()) {
+                    if (mInterstitialAd != null && mInterstitialAd.isLoaded()) {
                         mInterstitialAd.show();
                     } else {
                         Log.d("TAG", "The interstitial wasn't loaded yet.");

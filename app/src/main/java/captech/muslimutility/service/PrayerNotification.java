@@ -167,15 +167,15 @@ public class PrayerNotification extends Service {
         //mNotificationManager.cancelAll();
         //NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         //notificationManager.notify(0, builder.build());
-        TimerTask task = new TimerTask() {
+        /*TimerTask task = new TimerTask() {
             public void run() {
                 mNotificationManager.cancelAll();
             }
         };
-        Timer timer = new Timer("Timer");
+        Timer timer = new Timer("Stop Prayer Timer");
 
         long delay = 300000L;
-        timer.schedule(task, delay);
+        timer.schedule(task, delay);*/
     }
 
     @Override

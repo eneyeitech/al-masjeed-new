@@ -152,10 +152,10 @@ public class MainActivity extends AppCompatActivity implements com.google.androi
 
         setContentView(R.layout.activity_main);
 
-        MobileAds.initialize(this, getResources().getString(R.string.app_id));
+        /*MobileAds.initialize(this, getResources().getString(R.string.app_id));
         mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        mAdView.loadAd(adRequest);*/
 
         dbManager = new DBManager(this);
         dbManager.open();

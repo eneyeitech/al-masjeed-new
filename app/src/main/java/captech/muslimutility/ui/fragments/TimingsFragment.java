@@ -298,24 +298,31 @@ public class TimingsFragment extends Fragment {
             DateFormat formatter = new SimpleDateFormat("yyyy.MM.d hh:mm a");
             String dateString = "";
             dateString = preferences.getString("ifajr", currentDate + " " + String.valueOf(t.get(2)));
+            dateString = currentDate + dateString.substring(10);
             Log.d("f",dateString);
             fajrDate = (Date)formatter.parse(dateString);
             dateString = preferences.getString("isunrise", currentDate + " " + String.valueOf(t.get(3)));
+            dateString = currentDate + dateString.substring(10);
             Log.d("s",dateString);
             sunriseDate = (Date)formatter.parse(dateString);
             dateString = preferences.getString("izohr", currentDate + " " + String.valueOf(t.get(4)));
+            dateString = currentDate + dateString.substring(10);
             Log.d("z",dateString);
             duhrDate = (Date)formatter.parse(dateString);
             dateString = preferences.getString("iasr", currentDate + " " + String.valueOf(t.get(5)));
+            dateString = currentDate + dateString.substring(10);
             Log.d("a",dateString);
             asrDate = (Date)formatter.parse(dateString);
             dateString = preferences.getString("imagrib", currentDate + " " + String.valueOf(t.get(6)));
+            dateString = currentDate + dateString.substring(10);
             Log.d("m",dateString);
             maghrebDate = (Date)formatter.parse(dateString);
             dateString = preferences.getString("iisha", currentDate + " " + String.valueOf(t.get(7)));
+            dateString = currentDate + dateString.substring(10);
             Log.d("i",dateString);
             ishaDate = (Date)formatter.parse(dateString);
             dateString = preferences.getString("ifriday", currentDate + " " + String.valueOf(t.get(8)));
+            dateString = currentDate + dateString.substring(10);
             Log.d("fr",dateString);
             fridayDate = (Date)formatter.parse(dateString);
 
@@ -401,8 +408,8 @@ public class TimingsFragment extends Fragment {
         Date current = Calendar.getInstance().getTime();
 
         Log.d("Current Time::TF", String.valueOf(current));
-        tomorrowDate();
-        previousDate();
+        //tomorrowDate();
+        //previousDate();
 
         if (current.after(fajrDate) && current.before(sunriseDate)) {
             pray2.setBackgroundColor(getResources().getColor(R.color.contrast));

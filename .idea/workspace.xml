@@ -16,11 +16,13 @@
   <component name="ChangeListManager">
     <list default="true" id="110fe56c-623d-4b20-8d8c-69e00a238394" name="Default" comment="Fixed the timing problem">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/adapter/IslamicEventAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/adapter/IslamicEventAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/service/PrayerAlarm.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/service/PrayerAlarm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/service/PrayerNotification.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/service/PrayerNotification.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/service/PrayingDayCalculateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/service/PrayingDayCalculateHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/ui/activity/AzkarActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/ui/activity/AzkarActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/ui/activity/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/ui/activity/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/ui/activity/MosquesActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/ui/activity/MosquesActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/ui/fragments/TimingsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/ui/fragments/TimingsFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/ui/widget/PrayerWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/captech/muslimutility/ui/widget/PrayerWidget.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +33,7 @@
     <option name="testRunner" value="GRADLE" />
     <option name="delegatedBuild" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[adb-R9HR308T3RJ-2YZLtK._adb-tls-connect._tcp.]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[R9HR308T3RJ]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />

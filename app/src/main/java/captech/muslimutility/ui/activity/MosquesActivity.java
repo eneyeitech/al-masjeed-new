@@ -80,11 +80,11 @@ public class MosquesActivity extends AppCompatActivity implements OnMapReadyCall
         registerRequestUpdate(this);
         FontsOverride.setDefaultFont(this, "DEFAULT", "fonts/ProximaNovaReg.ttf");
 
-        MobileAds.initialize(this,
+       /* MobileAds.initialize(this,
                 "ca-app-pub-5379314308386326~5125464320");
         mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        mAdView.loadAd(adRequest);*/
 
     }
 
