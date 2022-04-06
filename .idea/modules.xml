@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/muslimorganizer.iml" filepath="$PROJECT_DIR$/muslimorganizer.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/muslimorganizer.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/muslimorganizer.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/al-masjeed-new.iml" filepath="$PROJECT_DIR$/.idea/modules/al-masjeed-new.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/al-masjeed-new.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/al-masjeed-new.app.iml" />
     </modules>
   </component>
 </project>

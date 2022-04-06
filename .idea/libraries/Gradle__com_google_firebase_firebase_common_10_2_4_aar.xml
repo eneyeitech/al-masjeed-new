@@ -8,6 +8,9 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7522f73073d77421aa1801c2aaf6d9f1/jetified-firebase-common-10.2.4/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5875a2164cad863840c64a0665ce3d58/jetified-firebase-common-10.2.4/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5875a2164cad863840c64a0665ce3d58/jetified-firebase-common-10.2.4/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e4c206c21193d2b5a988b7582fbcaff0/jetified-firebase-common-10.2.4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e4c206c21193d2b5a988b7582fbcaff0/jetified-firebase-common-10.2.4/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e4c206c21193d2b5a988b7582fbcaff0/jetified-firebase-common-10.2.4/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -8,6 +8,9 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/441dc4d580f18fa7606896ea005bc37e/jetified-play-services-iid-10.2.4/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a4cf84f3ce0ee59f90be3b414ee00b60/jetified-play-services-iid-10.2.4/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a4cf84f3ce0ee59f90be3b414ee00b60/jetified-play-services-iid-10.2.4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7e509bbbf4187ee5a8c7b08ad7b4592f/jetified-play-services-iid-10.2.4/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7e509bbbf4187ee5a8c7b08ad7b4592f/jetified-play-services-iid-10.2.4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7e509bbbf4187ee5a8c7b08ad7b4592f/jetified-play-services-iid-10.2.4/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

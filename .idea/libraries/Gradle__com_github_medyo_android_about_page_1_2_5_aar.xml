@@ -7,6 +7,9 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1e85fec302f6400d4d4a99e88e5ef02a/jetified-android-about-page-1.2.5/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1e85fec302f6400d4d4a99e88e5ef02a/jetified-android-about-page-1.2.5/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1e85fec302f6400d4d4a99e88e5ef02a/jetified-android-about-page-1.2.5/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/810346d8d96cbd632908e93d64fd57ff/jetified-android-about-page-1.2.5/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/810346d8d96cbd632908e93d64fd57ff/jetified-android-about-page-1.2.5/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/810346d8d96cbd632908e93d64fd57ff/jetified-android-about-page-1.2.5/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.medyo/android-about-page/1.2.5/19891f2e9d743c603ebd4c29ea1646ce40e31ab4/android-about-page-1.2.5-javadoc.jar!/" />
